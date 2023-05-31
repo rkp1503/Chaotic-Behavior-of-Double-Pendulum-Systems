@@ -1,0 +1,61 @@
+%-----------------------------------------------------------------------------
+% Author: Rayla Kurosaki
+% GitHub: https://github.com/rkp1503
+%-----------------------------------------------------------------------------
+\documentclass{rayla-project}
+\usepackage{rayla-math-style}
+
+%-----------------------------------------------------------------------------
+% Assignment Information
+%-----------------------------------------------------------------------------
+\myUniversity{
+    Rochester Institute of Technology\\
+    College of Science\\
+    School of Mathematics and Statistics
+    }
+\myTitle{Analyzing the Chaotic Behavior of the Double Pendulum System}
+\myName{Rayla Kurosaki}
+\courseid{PHYS-377.01}
+\courseName{Advanced Computational Physics}
+\professorName{Dr. Pratik Dholabhai}
+\term{2020-2021 Spring}
+\dueDate{May 04, 2021}
+
+%-----------------------------------------------------------------------------
+% Start of Document
+%-----------------------------------------------------------------------------
+\begin{document}
+
+    \maketitle
+
+    %-------------------------------------------------------------------------
+    % Abstract
+    %-------------------------------------------------------------------------
+    \begin{abstract}
+        The double pendulum is a classic example of a chaotic system that exhibits complex and unpredictable behavior. In this paper, we investigate the dynamics of the double pendulum and analyze its chaotic characteristics. We begin by formulating the equations of motion using Lagrangian mechanics, considering the gravitational forces and constraints on the system. Through numerical simulations and computational techniques, we explore the evolution of the double pendulum system under various initial conditions. Our analysis reveals that the double pendulum demonstrates sensitive dependence on initial conditions, commonly referred to as the "butterfly effect." Small variations in the initial conditions lead to significant deviations in the system's subsequent motion, making long-term predictions challenging.
+    \end{abstract}
+
+    %-------------------------------------------------------------------------
+    % Body
+    %-------------------------------------------------------------------------
+    \input{content/introduction-and-background.tex}
+    \input{content/program-manual.tex}
+    \input{content/results-and-analysis.tex}
+    \input{content/summary.tex}
+
+    %-------------------------------------------------------------------------
+    % Bibliography
+    %-------------------------------------------------------------------------
+    \newpage
+    \nocite{*}
+    \printbibliography[title={Bibliography}]
+
+    %-------------------------------------------------------------------------
+    % Appendix
+    %-------------------------------------------------------------------------
+    \newpage
+    \appendix
+    \input{appendices/figures.tex}
+    \input{appendices/python-code.tex}
+
+\end{document}
