@@ -1,0 +1,65 @@
+%-----------------------------------------------------------------------------
+% Author: Rayla Kurosaki
+% GitHub: https://github.com/rkp1503
+%-----------------------------------------------------------------------------
+
+%-----------------------------------------------------------------------------
+% 3rd Party Packages
+%-----------------------------------------------------------------------------
+\usepackage{caption, subcaption}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{ifthen}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage[dvipsnames]{xcolor}
+
+%-----------------------------------------------------------------------------
+% Derivative Notations
+%-----------------------------------------------------------------------------
+% Operator derivative
+\newcommand{\opdiff}[1]{\ensuremath{\mathrm{d}#1}}
+% General derivative (Leibniz's notation)
+\newcommand{\diff}[3][]{
+    \ifthenelse
+    {\equal{#1}{}}
+    {\ensuremath{\frac{\opdiff{#2}}{\opdiff{#3}}}}
+    {\ensuremath{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}}
+    }
+% General non-mixed partial derivative (Leibniz's notation)
+\newcommand{\pdiff}[3][]{
+    \ifthenelse{\equal{#1}{}}
+    {\ensuremath{\frac{\partial#2}{\partial#3}}}
+    {\ensuremath{\frac{\partial^{#1}#2}{\partial#3^{#1}}}}
+}
+
+%-----------------------------------------------------------------------------
+% Custom colors
+%-----------------------------------------------------------------------------
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%-----------------------------------------------------------------------------
+% Custom code referencing style
+%-----------------------------------------------------------------------------
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
