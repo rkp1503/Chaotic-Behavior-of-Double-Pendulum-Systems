@@ -1,0 +1,28 @@
+\section{Program Manual}
+\subsection{Summary of the program}
+This program can be ran in two ways. You can either run the Jupyter Notebook file \texttt{main.ipynb} or run the python script \texttt{main.py}. Both files will generate the same output. The purpose of this program is to not only solve the equations of motion of the double pendulum system, but also generate an animation of a double pendulum system with different animated plots that are in sync with animation of the double pendulum system.
+
+\subsection{Installation requirements}
+For this program to work, you need to be able to successfully run a Jupyter Notebook or a Python file. The rest of this subsection assumes you have the ability to open, edit, and run a Jupyter Notebook or a Python file. The required libraries you need in order to successfully run the program are \texttt{matplotlib} and \texttt{numpy}. 
+
+\subsection{Details on the program}
+After the user has decided on the value of the initial conditions and the parameters, the user can run the program. Upon running the program, the first thing that the program will do is solve the system of equations in Equation~(\ref{eq:system-of-equations}). The python code that captures the system of equations can be found in Appendix \ref{subsec:system-of-ordinary-differential-equations}. The method I used to solve this system of differential equations is the Runge-Kutta order 4 method. My implementation of this method can be found in Appendix \ref{subsec:my-implementation-of-the-runge-kutta-order-4-method}. The code in Appendix \ref{subsec:my-implementation-of-the-runge-kutta-order-4-method} has a function called \verb|get_data()|. The purpose of this helper function is to gather the data we want more easily. The input is an $n \times m$ array and it transposes that array. Appendix \ref{subsec:get-data-helper-function} shows the code for the function \verb|get_data()|. Once the system of differential equations is solved, the program will generate five plots based the solution to the system of differential equations. These five plots will be saved as images for the user's reference and they are plotting:
+
+\begin{enumerate}
+    \item $\theta_2$ vs $\theta_1$
+    \item $\omega_2$ vs $\omega_1$
+    \item $\theta_1, \theta_2$ vs time
+    \item $\omega_1, \omega_2$ vs time
+    \item Potential, Kinetic, and Total Energies vs time
+\end{enumerate}
+
+After the plots are generated and saved as images, the program will create an animation. Using the constants, parameters, and initial conditions that the user initialized as well as the solution to the system of differential equations, this animation will involve:
+
+\begin{itemize}
+    \item A simulation of the double pendulum system
+    \item $\theta_2$ vs $\theta_1$
+    \item $\omega_2$ vs $\omega_1$
+    \item $\theta_1, \theta_2$ vs time
+    \item $\omega_1, \omega_2$ vs time
+    \item Potential, Kinetic, and Total Energies vs time
+\end{itemize}
