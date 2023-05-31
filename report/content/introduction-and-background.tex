@@ -1,0 +1,188 @@
+\section{Introduction and Background}
+\subsection{Introduction}
+A dynamical system, in physics, typically describes the state of a particle that varies over time. One particular example of a dynamical system in physics is the double pendulum. A single pendulum consists of one object (a bob) that is connected to a fixed point by an non-stretchable string. A double pendulum is an extension of the single pendulum where you attach another bob at the end of the single pendulum. Unlike a single pendulum, the double pendulum has a strong sensitivity to its initial conditions, which causes the double pendulum to behave in a chaotic way. 
+
+\subsection{Goals}
+\begin{enumerate}
+    \item Derive the potential, kinetic, and total energies of a generic double pendulum system.
+    \item Derive the system of equations that represents the motion for a generic double pendulum system.
+    \item Solve the system of equations numerically using a custom ODE solver. This solver uses the Runge-Kutta Order 4 method.
+    \item Create an animation of the double pendulum along with some animated graphs. These animated graphs are meant to be in sync with the double pendulum animation.
+    \item Show that the Double Pendulum system is a chaotic system by showing the differences a small change in a initial condition can do.
+\end{enumerate}
+
+\subsection{Fundamental Physics}
+Figure~\ref{fig:1} captures a frame of the double pendulum. Here we will set the initial anchor at the origin $O$. $x_i$ represents the horizontal distance from the origin to bob $i$, $y_i$ represents the vertical distance from the origin to bob $i$, and $\theta_i$ represents the angle bob $i$ makes between the anchor or the bob above it and the vertical. \\
+
+We can derive the equations that are necessary to show the behavior of this chaotic system. Lets start by deriving the potential, kinetic, and the total energy of this system. From Figure~\ref{fig:1}, we can determine the positions of each bob. The $x$ and $y$ coordinates for bob 1 are:
+
+\begin{equation}
+    \begin{aligned}
+        x_1 &= l_1\sin\left(\theta_1\right)\\
+        y_1 &= -l_1\cos\left(\theta_1\right)
+    \end{aligned}
+    \label{eq:bob-1-position-components}
+\end{equation}
+
+and the $x$ and $y$ coordinates for bob 2 are:
+
+\begin{equation}
+    \begin{aligned}
+        x_2 &= l_1\sin\left(\theta_1\right) + l_2\sin\left(\theta_2\right)\\
+        y_2 &= -l_1\cos\left(\theta_1\right) - l_2\cos\left(\theta_2\right)
+    \end{aligned}
+    \label{eq:bob-2-position-components}
+\end{equation}
+
+Next, we will compute the total potential energy of the system. We know that the potential energy for bob $i$ is $PE_i = m_i g h_i$. We also know that $h_i$ is the vertical component of bob $i$, or $y_i$. Using these $y$ components from Equations (\ref{eq:bob-1-position-components})-(\ref{eq:bob-2-position-components}), we can compute the total potential energy of the system:
+
+\begin{align*}
+    PE &= PE_1 + PE_2\\
+    PE &= m_1gh_1 + m_2gh_2\\
+    PE &= m_1gy_1 + m_2gy_2\\
+    PE &= m_1g\left(-l_1\cos\left(\theta_1\right)\right) + m_2g\left(-l_1\cos\left(\theta_1\right) - l_2\cos\left(\theta_2\right)\right)
+\end{align*}
+
+or 
+
+\begin{equation}
+    PE = -\left(m_1 + m_2\right)gl_1\cos\left(\theta_1\right) - m_2gl_2\cos\left(\theta_2\right)
+    \label{eq:potential-energy}
+\end{equation}
+
+Next, we will compute the first time derivatives of the equations in Equation~\ref{eq:bob-1-position-components} to get bob 1's velocity components:
+
+\begin{equation}
+    \begin{aligned}
+        v_{x_1} &= l_1\dot{\theta_1}\cos\left(\theta_1\right)\\
+        v_{y_1} &= l_1\dot{\theta_1}\sin\left(\theta_1\right)
+    \end{aligned}
+    \label{eq:bob-1-velocity-components}
+\end{equation}
+
+Repeating this procedure on Equation~\ref{eq:bob-2-position-components} for bob 2 yields:
+
+\begin{equation}
+    \begin{aligned}
+        v_{x_2} &= l_1\dot{\theta_1}\cos\left(\theta_1\right) + l_2\dot{\theta_2}\cos\left(\theta_2\right)\\
+        v_{y_2} &= l_1\dot{\theta_1}\sin\left(\theta_1\right) + l_2\dot{\theta_2}\sin\left(\theta_2\right)
+    \end{aligned}
+    \label{eq:bob-2-velocity-components}
+\end{equation}
+
+We know that the velocity of bob $i$ is $v_i^2 = v_{x_i}^2 + v_{y_i}^2$. Using the equations in Equation~\ref{eq:bob-1-velocity-components}, we can compute the velocity of bob 1:
+
+\begin{equation}
+    v_1^2 = l_1^2\dot{\theta_1}^2
+    \label{eq:bob-1-velocity}
+\end{equation}
+
+And we can follow the same steps to compute the velocity of bob 2:
+
+\begin{equation}
+    v_2^2 = l_1^2\dot{\theta_1}^2 + l_2^2\dot{\theta_2}^2 + 2l_1l_2\dot{\theta_1}\dot{\theta_2}\cos\left(\theta_1 - \theta_2\right)
+    \label{eq:bob-2-velocity}
+\end{equation}
+
+With this, we can now compute the total kintetic energy of the system. We know that the kinetic energy for bob $i$ is $KE_i = \left(m_i v_i^2\right)/2$. With Equations (\ref{eq:bob-1-velocity})-(\ref{eq:bob-2-velocity}), we can say that the total kinetic energy of the system is:
+
+\begin{align*}
+    KE &= KE_1 + KE_2\\
+    KE &= \frac{m_1 v_1^2}{2} + \frac{m_2 v_2^2}{2}\\
+    KE &= \frac{m_1 \left(l_1^2\dot{\theta_1}^2\right)}{2} + \frac{m_2 \left(l_1^2\dot{\theta_1}^2 + l_2^2\dot{\theta_2}^2 + 2l_1l_2\dot{\theta_1}\dot{\theta_2}\cos\left(\theta_1 - \theta_2\right)\right)}{2}
+\end{align*}
+
+or:
+
+\begin{equation}
+    KE = \frac{\left(m_1 + m_2\right)l_1^2\dot{\theta_1}^2+m_2l_2^2\dot{\theta_2}^2}{2} + m_2l_1l_2\dot{\theta_1}\dot{\theta_2}\cos\left(\theta_1 - \theta_2\right)
+    \label{eq:kinetic-energy}
+\end{equation}
+
+With expressions for the total potential energy and the total kinetic energy, we can compute the total energy of the system. The total energy is the sum of all energies. Thus, we have $TE=KE+PE$ or:
+
+\begin{equation}
+    TE = \frac{\left(m_1 + m_2\right)l_1^2\dot{\theta_1}^2+m_2l_2^2\dot{\theta_2}^2}{2} + m_2l_1l_2\dot{\theta_1}\dot{\theta_2}\cos\left(\theta_1 - \theta_2\right) - \left(m_1 + m_2\right)gl_1\cos\left(\theta_1\right) - m_2gl_2\cos\left(\theta_2\right)
+    \label{eq:total-energy}
+\end{equation}
+
+Now lets derive the equations that capture the motion of the system. To do this, we will need to determine the Lagrangian. The lagrangian of a system is $L=KE-PE$. For this system, the lagrangian is:
+
+\begin{equation}
+    L = \frac{\left(m_1 + m_2\right)l_1^2\dot{\theta_1}^2+m_2l_2^2\dot{\theta_2}^2}{2} + m_2l_1l_2\dot{\theta_1}\dot{\theta_2}\cos\left(\theta_1 - \theta_2\right) + \left(m_1 + m_2\right)gl_1\cos\left(\theta_1\right) + m_2gl_2\cos\left(\theta_2\right)
+    \label{eq:lagrangian}
+\end{equation}
+
+Now we will need to utilize the Euler-Lagrange equation, which states:
+
+\begin{equation}
+    \diff[]{}{t}\left(\pdiff[]{L}{\dot{\theta}}\right) - \pdiff[]{L}{\theta} = 0
+    \label{eq:euler-lagrange}
+\end{equation}
+
+We will apply the Euler-Lagrange equation to both $\theta_1$ and $\theta_2$. Applying the Euler-Lagrange equation to $\theta_1$, we get:
+
+\begin{align*}
+    0 &= \diff[]{}{t}\left(\pdiff[]{L}{\dot{\theta_1}}\right) - \pdiff[]{L}{\theta_1}\\
+    0 &= \diff[]{}{t}\left(\left(m_1 + m_2\right)l_1^2\dot{\theta_1} + m_2l_1l_2\dot{\theta_2}\cos\left(\theta_1 - \theta_2\right)\right) - \left(-m_2l_1l_2\dot{\theta_1}\dot{\theta_2}\sin\left(\theta_1 - \theta_2\right) - gl_1\left(m_1 + m_2\right)\sin\left(\theta_1\right)\right)\\
+    0 &= \left(m_1 + m_2\right)l_1^2\ddot{\theta_1} + m_2l_1l_2\ddot{\theta_2}\cos\left(\theta_1 - \theta_2\right) + m_2l_1l_2\dot{\theta_1}\dot{\theta_2}\sin\left(\theta_1 - \theta_2\right) + gl_1\left(m_1 + m_2\right)\sin\left(\theta_1\right)
+\end{align*}
+
+or:
+
+\begin{equation}
+    \left(m_1 + m_2\right)l_1\ddot{\theta_1} + m_2l_2\ddot{\theta_2}\cos\left(\theta_1 - \theta_2\right) + m_2l_2\dot{\theta_1}\dot{\theta_2}\sin\left(\theta_1 - \theta_2\right) + g\left(m_1 + m_2\right)\sin\left(\theta_1\right) = 0
+    \label{eq:bob-1-motion}
+\end{equation}
+
+Applying the Euler-Lagrange equation to $\theta_2$, we get:
+
+\begin{align*}
+    0 &= \diff[]{}{t}\left(\pdiff[]{L}{\dot{\theta_2}}\right) - \pdiff[]{L}{\theta_2}\\
+    0 &= \diff[]{}{t}\left(m_2l_2^2\dot{\theta_2} + m_2l_1l_2\dot{\theta_1}\cos\left(\theta_1 - \theta_2\right)\right) - \left(m_2l_1l_2\dot{\theta_1}\dot{\theta_2}\sin\left(\theta_1 - \theta_2\right) - m_2gl_2\sin\left(\theta_2\right)\right)\\
+    0 &= m_2l_2^2\ddot{\theta_2} + m_2l_1l_2\ddot{\theta_1}\cos\left(\theta_1 - \theta_2\right) - m_2l_1l_2\dot{\theta_1}\dot{\theta_2}\sin\left(\theta_1 - \theta_2\right) + m_2gl_2\sin\left(\theta_2\right)\\
+    0 &= l_2\ddot{\theta_2} + l_1\ddot{\theta_1}\cos\left(\theta_1 - \theta_2\right) - l_1\dot{\theta_1}\dot{\theta_2}\sin\left(\theta_1 - \theta_2\right) + g\sin\left(\theta_2\right)
+\end{align*}
+
+or:
+
+\begin{equation}
+    l_2\ddot{\theta_2} + l_1\ddot{\theta_1}\cos\left(\theta_1 - \theta_2\right) - l_1\dot{\theta_1}\dot{\theta_2}\sin\left(\theta_1 - \theta_2\right) + g\sin\left(\theta_2\right) = 0
+    \label{eq:bob-2-motion}
+\end{equation}
+
+We will now combine Equations (\ref{eq:bob-1-motion}) and (\ref{eq:bob-2-motion}) to create a system of equations:
+
+\begin{equation*}
+    \begin{dcases}
+        \begin{aligned}
+            0 &= \left(m_1 + m_2\right)l_1\ddot{\theta_1} + m_2l_2\ddot{\theta_2}\cos\left(\theta_1 - \theta_2\right) + m_2l_2\dot{\theta_1}\dot{\theta_2}\sin\left(\theta_1 - \theta_2\right) + g\left(m_1 + m_2\right)\sin\left(\theta_1\right)\\
+            0 &= l_2\ddot{\theta_2} + l_1\ddot{\theta_1}\cos\left(\theta_1 - \theta_2\right) - l_1\dot{\theta_1}\dot{\theta_2}\sin\left(\theta_1 - \theta_2\right) + g\sin\left(\theta_2\right)
+        \end{aligned}
+    \end{dcases}
+\end{equation*}
+
+We can rewrite the above system of equations to express $\ddot{\theta}_1$ and $\ddot{\theta}_2$ with respect to the other variables and parameters:
+
+\begin{equation*}
+    \begin{dcases}
+        \begin{aligned}
+            \ddot{\theta}_1 &= \frac{-g\left(2m_1 + m_2\right)\sin\left(\theta_1\right) - m_2g\sin\left(\theta_1 - 2\theta_2\right) - 2m_2\left(\dot{\theta}_2^2l_2 + \dot{\theta}_1^2l_1\cos\left(\theta_1 - \theta_2\right)\right)\sin\left(\theta_1 - \theta_2\right)}{l_1\left(2m_1 + m_2 - m_2\cos\left(2\left(\theta_1 - \theta_2\right)\right)\right)}\\
+            \ddot{\theta}_2 &= \frac{2\left(\dot{\theta}_1^2l_1\left(m_1 + m_2\right)+\left(m_1 + m_2\right)g\cos\left(\theta_1\right) + \dot{\theta}_2^2l_2m_2\cos\left(\theta_1 - \theta_2\right)\right)\sin\left(\theta_1 - \theta_2\right)}{l_2\left(2m_1 + m_2 - m_2\cos\left(2\left(\theta_1 - \theta_2\right)\right)\right)}
+        \end{aligned}
+    \end{dcases}
+\end{equation*}
+
+Finally, we can modify the system once more. We will let $\omega_i=\dot{\theta}_i$ to obtain a system of 4 ordinary differential equations:
+
+\begin{equation}
+    \begin{dcases}
+        \begin{aligned}
+            \dot{\theta}_1 &= \omega_1\\
+            \dot{\theta}_2 &= \omega_2\\
+            \dot{\omega}_1 &= \frac{-g\left(2m_1 + m_2\right)\sin\left(\theta_1\right) - m_2g\sin\left(\theta_1 - 2\theta_2\right) - 2m_2\left(\omega_2^2l_2 + \omega_1^2l_1\cos\left(\theta_1 - \theta_2\right)\right)\sin\left(\theta_1 - \theta_2\right)}{l_1\left(2m_1 + m_2 - m_2\cos\left(2\left(\theta_1 - \theta_2\right)\right)\right)}\\
+            \dot{\omega}_2 &= \frac{2\left(\omega_1^2l_1\left(m_1 + m_2\right)+\left(m_1 + m_2\right)g\cos\left(\theta_1\right) + \omega_2^2l_2m_2\cos\left(\theta_1 - \theta_2\right)\right)\sin\left(\theta_1 - \theta_2\right)}{l_2\left(2m_1 + m_2 - m_2\cos\left(2\left(\theta_1 - \theta_2\right)\right)\right)}
+        \end{aligned}
+    \end{dcases}
+    \label{eq:system-of-equations}
+\end{equation}
