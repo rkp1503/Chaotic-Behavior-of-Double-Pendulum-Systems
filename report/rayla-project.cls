@@ -39,7 +39,7 @@
         \vspace{8pt}
         \hrule
         \vspace{10pt}
-        {Course: {\itshape \courseNameLoc \ (\courseidLoc)}} \hfill {Term: {\itshape \termLoc}}\\
+        {Course: {\itshape \courseidLoc \ (\courseNameLoc)}} \hfill {Term: {\itshape \termLoc}}\\
         {Professor: {\itshape\professorNameLoc}} \hfill {Due date: {\itshape\dueDateLoc}}
         \vspace{20pt}
     \end{center}
