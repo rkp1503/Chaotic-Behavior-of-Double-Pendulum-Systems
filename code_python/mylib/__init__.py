@@ -10,4 +10,4 @@ GitHub: https://github.com/rkp1503
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath('../code/mylib'))
+sys.path.append(os.getcwd())

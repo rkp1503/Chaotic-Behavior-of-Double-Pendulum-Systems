@@ -8,9 +8,9 @@ GitHub: https://github.com/rkp1503
 
 import os
 
+from matplotlib.animation import FuncAnimation
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.animation import FuncAnimation
 
 COLORS = ["#000000", "#FF0000", "#0000FF", "#00FF00", "#00FFFF", "#FF00FF",
           "#FFFF00", "#7F00FF"]
@@ -18,13 +18,14 @@ COLORS = ["#000000", "#FF0000", "#0000FF", "#00FF00", "#00FFFF", "#FF00FF",
 
 def save_figure(ic_set: str, filename: str):
     path_to_project_dir: str = os.path.dirname(os.getcwd())
-    path_to_figs: str = os.path.join(path_to_project_dir, "report\\figures")
-    if os.path.exists(path_to_figs):
-        path_to_dir: str = os.path.join(path_to_figs, ic_set)
-        if not os.path.exists(path_to_dir):
-            os.makedirs(path_to_dir)
+    path_to_figs_dir: str = os.path.join(path_to_project_dir, 
+                                         "report\\figures")
+    if os.path.exists(path_to_figs_dir):
+        path_to_sub_dir: str = os.path.join(path_to_figs_dir, ic_set)
+        if not os.path.exists(path_to_sub_dir):
+            os.makedirs(path_to_sub_dir)
             pass
-        path_to_fig: str = os.path.join(path_to_dir, f"{filename}.png")
+        path_to_fig: str = os.path.join(path_to_sub_dir, f"{filename}.png")
         plt.savefig(path_to_fig, bbox_inches="tight")
         pass
     pass

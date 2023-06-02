@@ -5,7 +5,7 @@ Alias: Rayla Kurosaki
 
 GitHub: https://github.com/rkp1503
 
-Terminal cmd: python code_py/main.py
+Terminal cmd: python code_python/main.py
 """
 
 # 3rd party libraries to install
