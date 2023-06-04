@@ -1,20 +1,21 @@
-\section{Introduction and Background}
-\subsection{Introduction}
-A dynamical system, in physics, typically describes the state of a particle that varies over time. One particular example of a dynamical system in physics is the double pendulum. A single pendulum consists of one object (a bob) that is connected to a fixed point by an non-stretchable string. A double pendulum is an extension of the single pendulum where you attach another bob at the end of the single pendulum. Unlike a single pendulum, the double pendulum has a strong sensitivity to its initial conditions, which causes the double pendulum to behave in a chaotic way. 
+\section{Introduction and Background}\label{sec:introduction-and-background}
 
-\subsection{Goals}
+\subsection{Introduction}\label{subsec:introduction}
+A dynamical system, in physics, typically describes the state of a particle that varies over time. One particular example of a dynamical system in physics is the double pendulum. A single pendulum consists of one object (a bob) that is connected to a fixed point by a non-stretchable string. A double pendulum is an extension of the single pendulum where you attach another bob at the end of the single pendulum. Unlike a single pendulum, the double pendulum has a strong sensitivity to its initial conditions, which causes the double pendulum to behave in a chaotic way.
+
+\subsection{Goals}\label{subsec:goals}
 \begin{enumerate}
     \item Derive the potential, kinetic, and total energies of a generic double pendulum system.
     \item Derive the system of equations that represents the motion for a generic double pendulum system.
-    \item Solve the system of equations numerically using a custom ODE solver. This solver uses the Runge-Kutta Order 4 method.
-    \item Create an animation of the double pendulum along with some animated graphs. These animated graphs are meant to be in sync with the double pendulum animation.
-    \item Show that the Double Pendulum system is a chaotic system by showing the differences a small change in a initial condition can do.
+    \item Solve the system of equations numerically using the Runge-Kutta Order 4 method.
+    \item Create an animation of the double pendulum along with some animated graphs which are meant to be in sync with the double pendulum animation.
+    \item Show that the Double Pendulum system is a chaotic system by showing the differences a small change in an initial condition can do.
 \end{enumerate}
 
-\subsection{Fundamental Physics}
-Figure~\ref{fig:1} captures a frame of the double pendulum. Here we will set the initial anchor at the origin $O$. $x_i$ represents the horizontal distance from the origin to bob $i$, $y_i$ represents the vertical distance from the origin to bob $i$, and $\theta_i$ represents the angle bob $i$ makes between the anchor or the bob above it and the vertical. \\
+\subsection{Fundamental Physics}\label{subsec:fundamental-physics}
+\figref{fig:1} captures a frame of the double pendulum. Here we will set the initial anchor at the origin $O$. $x_i$ represents the horizontal distance from the origin to bob $i$, $y_i$ represents the vertical distance from the origin to bob $i$, and $\theta_i$ represents the angle bob $i$ makes between the anchor or the bob above it and the vertical. \\
 
-We can derive the equations that are necessary to show the behavior of this chaotic system. Lets start by deriving the potential, kinetic, and the total energy of this system. From Figure~\ref{fig:1}, we can determine the positions of each bob. The $x$ and $y$ coordinates for bob 1 are:
+We can derive the equations that are necessary to show the behavior of this chaotic system. Let's start by deriving the potential, kinetic, and the total energy of this system. From \figref{fig:1}, we can determine the positions of each bob. The $x$ and $y$ coordinates for bob 1 are:
 
 \begin{equation}
     \begin{aligned}
@@ -34,7 +35,7 @@ and the $x$ and $y$ coordinates for bob 2 are:
     \label{eq:bob-2-position-components}
 \end{equation}
 
-Next, we will compute the total potential energy of the system. We know that the potential energy for bob $i$ is $PE_i = m_i g h_i$. We also know that $h_i$ is the vertical component of bob $i$, or $y_i$. Using these $y$ components from Equations (\ref{eq:bob-1-position-components})-(\ref{eq:bob-2-position-components}), we can compute the total potential energy of the system:
+Next, we will compute the total potential energy of the system. We know that the potential energy for bob $i$ is $PE_i = m_i g h_i$. We also know that $h_i$ is the vertical component of bob $i$, or $y_i$. Using these $y$ components from \eqref{eq:bob-1-position-components} and \eqref{eq:bob-2-position-components}, we can compute the total potential energy of the system:
 
 \begin{align*}
     PE &= PE_1 + PE_2\\
@@ -50,7 +51,7 @@ or
     \label{eq:potential-energy}
 \end{equation}
 
-Next, we will compute the first time derivatives of the equations in Equation~\ref{eq:bob-1-position-components} to get bob 1's velocity components:
+Next, we will compute the first time derivatives of the equations in \eqref{eq:bob-1-position-components} to get bob 1's velocity components:
 
 \begin{equation}
     \begin{aligned}
@@ -60,7 +61,7 @@ Next, we will compute the first time derivatives of the equations in Equation~\r
     \label{eq:bob-1-velocity-components}
 \end{equation}
 
-Repeating this procedure on Equation~\ref{eq:bob-2-position-components} for bob 2 yields:
+Repeating this procedure on \eqref{eq:bob-2-position-components} for bob 2 yields:
 
 \begin{equation}
     \begin{aligned}
@@ -70,7 +71,7 @@ Repeating this procedure on Equation~\ref{eq:bob-2-position-components} for bob 
     \label{eq:bob-2-velocity-components}
 \end{equation}
 
-We know that the velocity of bob $i$ is $v_i^2 = v_{x_i}^2 + v_{y_i}^2$. Using the equations in Equation~\ref{eq:bob-1-velocity-components}, we can compute the velocity of bob 1:
+We know that the velocity of bob $i$ is $v_i^2 = v_{x_i}^2 + v_{y_i}^2$. Using the equations in \eqref{eq:bob-1-velocity-components}, we can compute the velocity of bob 1:
 
 \begin{equation}
     v_1^2 = l_1^2\dot{\theta_1}^2
@@ -84,7 +85,7 @@ And we can follow the same steps to compute the velocity of bob 2:
     \label{eq:bob-2-velocity}
 \end{equation}
 
-With this, we can now compute the total kintetic energy of the system. We know that the kinetic energy for bob $i$ is $KE_i = \left(m_i v_i^2\right)/2$. With Equations (\ref{eq:bob-1-velocity})-(\ref{eq:bob-2-velocity}), we can say that the total kinetic energy of the system is:
+With this, we can now compute the total kinetic energy of the system. We know that the kinetic energy for bob $i$ is $KE_i = \left(m_i v_i^2\right)/2$. With \eqref{eq:bob-1-velocity} and \eqref{eq:bob-2-velocity}, we can say that the total kinetic energy of the system is:
 
 \begin{align*}
     KE &= KE_1 + KE_2\\
@@ -106,7 +107,7 @@ With expressions for the total potential energy and the total kinetic energy, we
     \label{eq:total-energy}
 \end{equation}
 
-Now lets derive the equations that capture the motion of the system. To do this, we will need to determine the Lagrangian. The lagrangian of a system is $L=KE-PE$. For this system, the lagrangian is:
+Now let's derive the equations that capture the motion of the system. To do this, we will need to determine the Lagrangian. The lagrangian of a system is $L=KE-PE$. For this system, the lagrangian is:
 
 \begin{equation}
     L = \frac{\left(m_1 + m_2\right)l_1^2\dot{\theta_1}^2+m_2l_2^2\dot{\theta_2}^2}{2} + m_2l_1l_2\dot{\theta_1}\dot{\theta_2}\cos\left(\theta_1 - \theta_2\right) + \left(m_1 + m_2\right)gl_1\cos\left(\theta_1\right) + m_2gl_2\cos\left(\theta_2\right)
@@ -151,7 +152,7 @@ or:
     \label{eq:bob-2-motion}
 \end{equation}
 
-We will now combine Equations (\ref{eq:bob-1-motion}) and (\ref{eq:bob-2-motion}) to create a system of equations:
+We will now combine \eqref{eq:bob-1-motion} and \eqref{eq:bob-2-motion} to create a system of equations:
 
 \begin{equation*}
     \begin{dcases}
