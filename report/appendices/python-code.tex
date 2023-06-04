@@ -1,8 +1,7 @@
-\section{Python code}
+\section{Python code}\label{sec:python-code}
 \lstset{style=mystyle}
 
-\subsection{System of Ordinary Differential Equations}
-\label{subsec:system-of-ordinary-differential-equations}
+\subsection{System of Ordinary Differential Equations}\label{subsec:system-of-ordinary-differential-equations}
 \begin{lstlisting}[language=Python]
 def df(F, t, params) -> np.array:
     # Unpack variables
@@ -56,9 +55,8 @@ def rk4(df, r, ts, h, params):
     return get_data(rs)
 \end{lstlisting}
 
-\subsection{Helper Function}
-\label{subsec:get-data-helper-function}
-\begin{lstlisting}[language=python]
+\subsection{Helper Function}\label{subsec:get-data-helper-function}
+\begin{lstlisting}[language=Python]
 def get_data(data):
     rs, cs = len(data), len(data[0])
     temp = np.empty((cs, rs), dtype=float)
