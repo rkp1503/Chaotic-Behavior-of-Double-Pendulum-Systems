@@ -19,11 +19,24 @@
 \newcommand{\dueDate}[1]{\newcommand{\dueDateLoc}{#1}}
 
 %-----------------------------------------------------------------------------
-% Document margins
+% 3rd party packages
 %-----------------------------------------------------------------------------
+\usepackage{amsmath}
+\usepackage[backend=biber,style=numeric,sorting=ynt]{biblatex}
 \usepackage{geometry}
-\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+\usepackage{graphicx,epstopdf}
+\usepackage{lipsum}
+
+%-----------------------------------------------------------------------------
+% Geometry
+%-----------------------------------------------------------------------------
+\geometry{left=2cm,right=2cm,top=2cm,bottom=2cm}
 \setlength\parindent{0pt}
+
+%-----------------------------------------------------------------------------
+% Setting figures directory
+%-----------------------------------------------------------------------------
+\graphicspath{{figures/}}
     
 %-----------------------------------------------------------------------------
 % Custom Title Style
@@ -46,12 +59,20 @@
 }
 
 %-----------------------------------------------------------------------------
-% bibliography settings
+% Custom referencing
 %-----------------------------------------------------------------------------
-\usepackage[backend=biber,style=numeric,sorting=ynt]{biblatex}
-\addbibresource{main.bib}
+% Referencing Sections
+\newcommand{\secref}[1]{Section~\ref{#1}}
+% Referencing Appendicies
+\newcommand{\appref}[1]{Appendix~\ref{#1}}
+% Referencing equations
+\renewcommand{\eqref}[1]{Equation~(\ref{#1})}
+% Referencing figures
+\newcommand{\figref}[1]{Figure~\ref{#1}}
+% Referencing tables
+\newcommand{\tabref}[1]{Table~\ref{#1}}
 
 %-----------------------------------------------------------------------------
-% Dummy text
+% Bibliography settings
 %-----------------------------------------------------------------------------
-\usepackage{lipsum}
+\addbibresource{main.bib}
