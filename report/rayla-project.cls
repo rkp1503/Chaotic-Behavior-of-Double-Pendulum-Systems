@@ -65,11 +65,13 @@
 \newcommand{\secref}[1]{Section~\ref{#1}}
 % Referencing Appendicies
 \newcommand{\appref}[1]{Appendix~\ref{#1}}
-% Referencing equations
+% Referencing an equation
 \renewcommand{\eqref}[1]{Equation~(\ref{#1})}
-% Referencing figures
+% Referencing a system of equations
+\newcommand{\sysref}[1]{System~(\ref{#1})}
+% Referencing a figure
 \newcommand{\figref}[1]{Figure~\ref{#1}}
-% Referencing tables
+% Referencing a table
 \newcommand{\tabref}[1]{Table~\ref{#1}}
 
 %-----------------------------------------------------------------------------
