@@ -13,9 +13,9 @@ A dynamical system, in physics, typically describes the state of a particle that
 \end{enumerate}
 
 \subsection{Fundamental Physics}\label{subsec:fundamental-physics}
-\figref{fig:1} captures a frame of the double pendulum. Here we will set the initial anchor at the origin $O$. $x_i$ represents the horizontal distance from the origin to bob $i$, $y_i$ represents the vertical distance from the origin to bob $i$, and $\theta_i$ represents the angle bob $i$ makes between the anchor or the bob above it and the vertical. \\
+\myref[Figure]{fig:1} captures a frame of the double pendulum. Here we will set the initial anchor at the origin $O$. $x_i$ represents the horizontal distance from the origin to bob $i$, $y_i$ represents the vertical distance from the origin to bob $i$, and $\theta_i$ represents the angle bob $i$ makes between the anchor or the bob above it and the vertical. \\
 
-We can derive the equations that are necessary to show the behavior of this chaotic system. Let's start by deriving the potential, kinetic, and the total energy of this system. From \figref{fig:1}, we can determine the positions of each bob. The $x$ and $y$ coordinates for bob 1 are:
+We can derive the equations that are necessary to show the behavior of this chaotic system. Let's start by deriving the potential, kinetic, and the total energy of this system. From \myref[Figure]{fig:1}, we can determine the positions of each bob. The $x$ and $y$ coordinates for bob 1 are:
 
 \begin{equation}
     \begin{aligned}
@@ -35,7 +35,7 @@ and the $x$ and $y$ coordinates for bob 2 are:
     \label{eq:bob-2-position-components}
 \end{equation}
 
-Next, we will compute the total potential energy of the system. We know that the potential energy for bob $i$ is $PE_i = m_i g h_i$. We also know that $h_i$ is the vertical component of bob $i$, or $y_i$. Using these $y$ components from \eqref{eq:bob-1-position-components} and \eqref{eq:bob-2-position-components}, we can compute the total potential energy of the system:
+Next, we will compute the total potential energy of the system. We know that the potential energy for bob $i$ is $PE_i = m_i g h_i$. We also know that $h_i$ is the vertical component of bob $i$, or $y_i$. Using these $y$ components from \myref[Equation]{eq:bob-1-position-components} and \myref[Equation]{eq:bob-2-position-components}, we can compute the total potential energy of the system:
 
 \begin{align*}
     PE &= PE_1 + PE_2\\
@@ -51,7 +51,7 @@ or
     \label{eq:potential-energy}
 \end{equation}
 
-Next, we will compute the first time derivatives of the equations in \eqref{eq:bob-1-position-components} to get bob 1's velocity components:
+Next, we will compute the first time derivatives of the equations in \myref[Equation]{eq:bob-1-position-components} to get bob 1's velocity components:
 
 \begin{equation}
     \begin{aligned}
@@ -61,7 +61,7 @@ Next, we will compute the first time derivatives of the equations in \eqref{eq:b
     \label{eq:bob-1-velocity-components}
 \end{equation}
 
-Repeating this procedure on \eqref{eq:bob-2-position-components} for bob 2 yields:
+Repeating this procedure on \myref[Equation]{eq:bob-2-position-components} for bob 2 yields:
 
 \begin{equation}
     \begin{aligned}
@@ -71,7 +71,7 @@ Repeating this procedure on \eqref{eq:bob-2-position-components} for bob 2 yield
     \label{eq:bob-2-velocity-components}
 \end{equation}
 
-We know that the velocity of bob $i$ is $v_i^2 = v_{x_i}^2 + v_{y_i}^2$. Using the equations in \eqref{eq:bob-1-velocity-components}, we can compute the velocity of bob 1:
+We know that the velocity of bob $i$ is $v_i^2 = v_{x_i}^2 + v_{y_i}^2$. Using the equations in \myref[Equation]{eq:bob-1-velocity-components}, we can compute the velocity of bob 1:
 
 \begin{equation}
     v_1^2 = l_1^2\dot{\theta_1}^2
@@ -85,7 +85,7 @@ And we can follow the same steps to compute the velocity of bob 2:
     \label{eq:bob-2-velocity}
 \end{equation}
 
-With this, we can now compute the total kinetic energy of the system. We know that the kinetic energy for bob $i$ is $KE_i = \left(m_i v_i^2\right)/2$. With \eqref{eq:bob-1-velocity} and \eqref{eq:bob-2-velocity}, we can say that the total kinetic energy of the system is:
+With this, we can now compute the total kinetic energy of the system. We know that the kinetic energy for bob $i$ is $KE_i = \left(m_i v_i^2\right)/2$. With \myref[Equation]{eq:bob-1-velocity} and \myref[Equation]{eq:bob-2-velocity}, we can say that the total kinetic energy of the system is:
 
 \begin{align*}
     KE &= KE_1 + KE_2\\
@@ -152,7 +152,7 @@ or:
     \label{eq:bob-2-motion}
 \end{equation}
 
-We will now combine \eqref{eq:bob-1-motion} and \eqref{eq:bob-2-motion} to create a system of equations:
+We will now combine \myref[Equation]{eq:bob-1-motion} and \myref[Equation]{eq:bob-2-motion} to create a system of equations:
 
 \begin{equation*}
     \begin{dcases}
