@@ -7,6 +7,16 @@
 \LoadClass{article}
 
 %-----------------------------------------------------------------------------
+% 3rd party packages
+%-----------------------------------------------------------------------------
+\usepackage{amsmath}
+\usepackage[backend=biber,style=numeric,sorting=ynt]{biblatex}
+\usepackage{geometry}
+\usepackage{graphicx,epstopdf}
+\usepackage{hyperref}
+\usepackage{lipsum}
+
+%-----------------------------------------------------------------------------
 % Defining new commands
 %-----------------------------------------------------------------------------
 \newcommand{\myUniversity}[1]{\newcommand{\myUniversityLoc}{#1}}
@@ -17,16 +27,6 @@
 \newcommand{\professorName}[1]{\newcommand{\professorNameLoc}{#1}}
 \newcommand{\term}[1]{\newcommand{\termLoc}{#1}}
 \newcommand{\dueDate}[1]{\newcommand{\dueDateLoc}{#1}}
-
-%-----------------------------------------------------------------------------
-% 3rd party packages
-%-----------------------------------------------------------------------------
-\usepackage{amsmath}
-\usepackage[backend=biber,style=numeric,sorting=ynt]{biblatex}
-\usepackage{geometry}
-\usepackage{graphicx,epstopdf}
-\usepackage{hyperref}
-\usepackage{lipsum}
 
 %-----------------------------------------------------------------------------
 % Geometry
@@ -62,9 +62,9 @@
 %-----------------------------------------------------------------------------
 % Custom referencing
 %-----------------------------------------------------------------------------
-% Referencing a section
+% Referencing Sections
 \newcommand{\secref}[1]{Section~\ref{#1}}
-% Referencing an appendix
+% Referencing Appendicies
 \newcommand{\appref}[1]{Appendix~\ref{#1}}
 % Referencing an equation
 \renewcommand{\eqref}[1]{Equation~(\ref{#1})}
