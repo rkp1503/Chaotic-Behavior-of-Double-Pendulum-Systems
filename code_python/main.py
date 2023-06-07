@@ -120,5 +120,5 @@ if __name__ == '__main__':
                         omega_i_2)
     title: str = f"Double Pendulum Simulation\nRayla Kurosaki"
     filename: str = "Double Pendulum Simulation"
-    # generate.animation(initial_conditions, sol, title, ic_set, filename)
+    generate.animation(initial_conditions, sol, title, ic_set, filename)
     pass
